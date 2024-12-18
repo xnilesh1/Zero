@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import ZeroText from './components/display-msg';
+import Demo from './components/input';
 import { useRef, useState } from "react";
 import "./App.scss";
 import { LiveAPIProvider } from "./contexts/LiveAPIContext";
@@ -21,6 +22,7 @@ import SidePanel from "./components/side-panel/SidePanel";
 import { Altair } from "./components/altair/Altair";
 import ControlTray from "./components/control-tray/ControlTray";
 import cn from "classnames";
+import { MessageProvider } from './components/MessageContext'; // Import the provider
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY as string;
 if (typeof API_KEY !== "string") {
@@ -41,10 +43,21 @@ function App() {
     <div className="App">
       <LiveAPIProvider url={uri} apiKey={API_KEY}>
         <div className="streaming-console">
-          <SidePanel />
           <main>
             <div className="main-app-area">
+
               {/* APP goes here */}
+              {/* <MessageProvider>
+              <Demo/>
+              
+              </MessageProvider> */}
+              <ZeroText /> 
+
+              
+
+              
+
+
               <Altair />
               <video
                 className={cn("stream", {
@@ -55,6 +68,7 @@ function App() {
                 playsInline
               />
             </div>
+            
 
             <ControlTray
               videoRef={videoRef}
